@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hunter Registration</title>
+  <style>
+    body {
+      background: linear-gradient(45deg, #0f172a, #1e293b);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      color: #facc15;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .hidden { display: none; }
+    .card, .partner-card, .map-card {
+      border: 2px solid #facc15;
+      padding: 1rem;
+      margin: 1rem;
+      display: inline-block;
+      background-color: rgba(45, 45, 45, 0.9);
+      cursor: pointer;
+      transition: transform 0.3s;
+      border-radius: 10px;
+    }
+    .card:hover, .partner-card:hover, .map-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #facc15;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #f59e0b;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-top: 1rem;
+      border-radius: 8px;
+    }
+    button:hover {
+      background-color: #d97706;
+    }
+    #dialog-section {
+      margin-top: 2rem;
+      border-top: 2px solid #ccc;
+      padding-top: 2rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #partner-response {
+      font-style: italic;
+      color: #93c5fd;
+      margin-bottom: 1rem;
+    }
+    #conversation {
+      margin-top: 1rem;
+      text-align: left;
+      max-height: 300px;
+      overflow-y: auto;
+      background-color: rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .chat-entry {
+      margin: 0.5rem 0;
+    }
+    #jawabanUser {
+      padding: 0.5rem;
+      width: 70%;
+      border-radius: 8px;
+      border: none;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hunter Registration</h1>
+  <audio id="dramaticAudio" src="light.mp3" preload="auto"></audio>
+  <audio id="usernameSound" src="hxh.mp3"></audio>
+
+  <div id="step1">
+    <p>Enter your name pleasee:</p>
+    <input type="text" id="nameInput" placeholder="Your name" />
+    <br />
+    <button onclick="goToStep2()">Next</button>
+  </div>
+
+  <div id="step2" class="hidden">
+    <h2>Very Nice! Now, Choose Your Hunter Card!</h2>
+    <div class="card" onclick="selectCard('Standard')">
+      <img src="nen.png" alt="Standard Card" />
+      <p>Standard</p>
+    </div>
+    <div class="card" onclick="selectCard('Elite')">
+      <img src="grmt.png" alt="Elite Card" />
+      <p>Elite</p>
+    </div>
+    <div class="card" onclick="selectCard('Phantom')">
+      <img src="prof.png" alt="Phantom Card" />
+      <p>Phantom</p>
+    </div>
+  </div>
+
+  <div id="step3" class="hidden">
+    <h2>Choose Your Favorite Partner For The Journey!</h2>
+    <div class="partner-card" onclick="selectPartner('Gon')"><img src="images gon.png" alt="Gon" /><p>Gon</p></div>
+    <div class="partner-card" onclick="selectPartner('Killua')"><img src="images killua.png" alt="Killua" /><p>Killua</p></div>
+    <div class="partner-card" onclick="selectPartner('Leorio')"><img src="images leorio.png" alt="Leorio" /><p>Leorio</p></div>
+    <div class="partner-card" onclick="selectPartner('Kurapika')"><img src="images kurapika.png" alt="Kurapika" /><p>Kurapika</p></div>
+    <div class="partner-card" onclick="selectPartner('Hisoka')"><img src="images hisoka.png" alt="Hisoka" /><p>Hisoka</p></div>
+    <div class="partner-card" onclick="selectPartner('Netero')"><img src="images netero.png" alt="Netero" /><p>Netero</p></div>
+    <div class="partner-card" onclick="selectPartner('Kite')"><img src="images kite.png" alt="Kite" /><p>Kite</p></div>
+    <div class="partner-card" onclick="selectPartner('Tonpa')"><img src="images tonpa.png" alt="Tonpa" /><p>Tonpa</p></div>
+    <div class="partner-card" onclick="selectPartner('Woonhak')"><img src="woonhak.png" alt="Woonhak" /><p>Woonhak</p></div>
+  </div>
+
+  <div id="step4" class="hidden">
+    <h2>Congratulations <span id="namaDisplay"></span>!</h2>
+    <p>You are now a licensed Hunter with a <span id="cardType"></span> card and your partner is <span id="partnerName"></span>, Are Your Ready?.</p>
+    <button onclick="goToStep5()">Choose Destination!</button>
+  </div>
+
+  <div id="step5" class="hidden">
+    <h2>Choose your Travel Destination</h2>
+    <div class="map-card" onclick="chooseDestination('Heavens Arena')">
+      <img src="heaves.png" alt="Heavens Arena" />
+      <p>Heavens Arena</p>
+    </div>
+    <div class="map-card" onclick="chooseDestination('Greed Island')">
+      <img src="greed.png" alt="Greed Island" />
+      <p>Greed Island</p>
+    </div>
+    <div class="map-card" onclick="chooseDestination('Zoldyck Estate')">
+      <img src="zoldyck.png" alt="Zoldyck Estate" />
+      <p>Zoldyck Estate</p>
+    </div>
+     <div class="map-card" onclick="chooseDestination('Konoha')">
+      <img src="konoha.png" alt="Zoldyck Estate" />
+      <p>Konoha</p>
+    </div>
+     <div class="map-card" onclick="chooseDestination('Roblox Island')">
+      <img src="roblok.png" alt="Zoldyck Estate" />
+      <p>Roblox Island</p>
+    </div>
+  </div>
+
+  <div id="dialog-section" class="hidden">
+    <h2>Partner Interaction</h2>
+    <div id="partner-response">Hello, please work with me!</div>
+    <div id="conversation"></div>
+    <input type="text" id="jawabanUser" placeholder="Say truee.." />
+    <br />
+    <button onclick="kirimBalasan()">Send</button>
+  </div>
+
+  <script>
+    let nama = "Player";
+    let partnerTerpilih = { name: "Gon" };
+
+    function goToStep2() {
+      nama = document.getElementById("nameInput").value;
+      if (!nama.trim()) return alert("Please enter your name.");
+      document.getElementById("step1").classList.add("hidden");
+      document.getElementById("step2").classList.remove("hidden");
+      document.getElementById("usernameSound").play();
+    }
+
+    function selectCard(type) {
+      document.getElementById("step2").classList.add("hidden");
+      document.getElementById("step3").classList.remove("hidden");
+      document.getElementById("cardType").innerText = type;
+    }
+
+  function selectPartner(name) {
+  const partnerImages = {
+    Gon: "gon2.png",
+    Killua: "killua2.png",
+    Leorio: "leorio.png",
+    Kurapika: "kurapika2.png",
+    Hisoka: "hisoka2.png",
+    Netero: "netero2.png",
+    Kite: "kite2.png",
+    Tonpa: "tonpa2.png",
+    Woonhak: "woonhak3.png" 
+  }
+
+  partnerTerpilih.name = name;
+  partnerTerpilih.img = partnerImages[name];
+
+  document.getElementById("step3").classList.add("hidden");
+  document.getElementById("step4").classList.remove("hidden");
+  document.getElementById("namaDisplay").innerText = nama;
+  document.getElementById("partnerName").innerText = name;
+    }
+
+    function goToStep5() {
+      document.getElementById("step4").classList.add("hidden");
+      document.getElementById("step5").classList.remove("hidden");
+    }
+
+    function chooseDestination(dest) {
+       document.getElementById("usernameSound").pause();
+  document.getElementById("usernameSound").currentTime = 0;
+      document.getElementById("step5").classList.add("hidden");
+      document.getElementById("dialog-section").classList.remove("hidden");
+
+
+      const responseDiv = document.getElementById("partner-response");
+      responseDiv.innerHTML = `
+      <img src="${partnerTerpilih.img}" alt="${partnerTerpilih.name}" style="max-width: 150px; border-radius: 10px; margin: 1rem auto; display: block;" />
+     <p><strong>${partnerTerpilih.name}:</strong> Hello ${nama}! Please work with me on our journey to <strong>${dest}</strong>!<br> Emm by the way, someone told me that today is your birthday! Is it true?</p>
+  `;
+}
+
+    
+
+    function kirimBalasan() {
+      const jawaban = document.getElementById("jawabanUser").value;
+      if (!jawaban.trim()) return;
+      const conversation = document.getElementById("conversation");
+
+      const entryUser = document.createElement("div");
+      entryUser.className = "chat-entry";
+      entryUser.innerText = `${nama}: \"${jawaban}\"`;
+      conversation.appendChild(entryUser);
+
+      document.getElementById("jawabanUser").value = "";
+
+      const responses = [
+        `Wow! Happy birthday Raishaa! he said wish you all the best, and he hope you'll always be a good and blessed person. Keep your spirits up! 😄`
+      ];
+
+      const audio = document.getElementById("dramaticAudio");
+      audio.play().catch(err => console.warn("Autoplay failed:", err));
+
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+
+      setTimeout(() => {
+        const response = document.createElement("div");
+        response.className = "chat-entry";
+        response.innerText = `${partnerTerpilih.name}: \"${randomResponse}\"`;
+        conversation.appendChild(response);
+        conversation.scrollTop = conversation.scrollHeight;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
