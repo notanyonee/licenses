@@ -146,6 +146,22 @@
       <img src="zoldyck.png" alt="Zoldyck Estate" />
       <p>Zoldyck Estate</p>
     </div>
+    <div class="map-card" onclick="chooseDestination('Yorknew City')">
+      <img src="yorknew.png" alt="Yorknew City" />
+      <p>Yorknew City</p>
+    </div>
+    <div class="map-card" onclick="chooseDestination('Zaban City')">
+      <img src="zaban.png" alt="Zaban City" />
+      <p>Zaban City</p>
+    </div>
+    <div class="map-card" onclick="chooseDestination('Meteor City')">
+      <img src="meteor.png" alt="Meteor City" />
+      <p>Meteor City</p>
+    </div>
+    <div class="map-card" onclick="chooseDestination('Dark Continent')">
+      <img src="dark.png" alt="Dark Continent" />
+      <p>Dark Continent</p>
+    </div>
      <div class="map-card" onclick="chooseDestination('Konoha')">
       <img src="konoha.png" alt="Zoldyck Estate" />
       <p>Konoha</p>
@@ -163,8 +179,9 @@
     <input type="text" id="jawabanUser" placeholder="Say truee.." />
     <br />
     <button onclick="kirimBalasan()">Send</button>
+      <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   </div>
-
+  
   <script>
     let nama = "Player";
     let partnerTerpilih = { name: "Gon" };
@@ -231,6 +248,12 @@
       if (!jawaban.trim()) return;
       const conversation = document.getElementById("conversation");
 
+         confetti({
+    particleCount: 700,
+    spread: 300,
+    origin: { y: 0.6 }
+  });
+
       const entryUser = document.createElement("div");
       entryUser.className = "chat-entry";
       entryUser.innerText = `${nama}: \"${jawaban}\"`;
@@ -239,7 +262,7 @@
       document.getElementById("jawabanUser").value = "";
 
       const responses = [
-        `Wow! Happy birthday Raishaa! he said wish you all the best, and he hope you'll always be a good and blessed person. Keep your spirits up! 😄`
+        `Woww! Happy birthday Raishaa! He said he wishing you all the best, and he hope you'll always be a good and blessed person, may all your dreams come true one dayy, keep your spirit up!!😄`
       ];
 
       const audio = document.getElementById("dramaticAudio");
